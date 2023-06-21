@@ -16,6 +16,7 @@ def check_position(f_number, l_number):
         f_number, l_number = l_number, f_number
     return f_number, l_number
 
+# takes the multiples of the first number and stores them up to the last multiplot of the range (first_num, last_num)
 def mult(f_number, l_number):
     multiples = []
     f_number, l_number = check_position(f_number, l_number)
