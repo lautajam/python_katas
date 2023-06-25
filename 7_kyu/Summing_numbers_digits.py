@@ -9,7 +9,7 @@ For example: (Input --> Output)
 -32 --> 5
 Let's assume that all numbers in the input will be integer values."""
 
-number = int(input("Type a integer number, please:"))
+number = int(input("Type a integer number, please: "))
 
 # Makes a summing digits transformming the negatives to positives and summing digits
 def summing_digit_numbers(number):
