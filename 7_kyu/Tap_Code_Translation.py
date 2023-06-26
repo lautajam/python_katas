@@ -21,17 +21,20 @@ A lowercase string of a single word (no whitespaces or punctuation, only letters
 Output:
 The encoded string as taps and pauses."""
 
+# List with the code
 code = (("a", "b", ("c", "k"), "d", "e"),
         ("f", "g", "h", "", "j"),
         ("l", "m", "n", "o", "p"),
         ("q", "r", "s", "t", "u"),
         ("v", "w", "x", "y", "z"))
 
+# Check where each letter is and write the position in row/column with dots.
 def tap_code_translation(code, word):
     translation = ""
     for letter in word:
         for row in code:
             for element in row:
+                # Create the code, reading the position where the number is (one group of dots for the row and another group for the column)
                 if letter == element:
                     secuence = ""
                     print(letter + " " + str(row) + " " +
@@ -43,6 +46,7 @@ def tap_code_translation(code, word):
                         secuence += "."
                     translation += secuence + " "
                     break
+                # if the letter is ("c", "k"), the function traverses the tuple and adds the letter
                 elif letter in element:
                     secuence = ""
                     print(letter + " " + str(row) + " " +
@@ -54,6 +58,6 @@ def tap_code_translation(code, word):
                         secuence += "."
                     translation += secuence + " "
                     break
-    print(translation)
+    return translation
 
-tap_code_translation(code, "casa")
+print(tap_code_translation(code, "ca/sa"))
