@@ -6,7 +6,7 @@ accum("RqaEzty") -> "R-Qq-Aaa-Eeee-Zzzzz-Tttttt-Yyyyyyy"
 accum("cwAt") -> "C-Ww-Aaa-Tttt"
 The parameter of accum is a string which includes only letters from a..z and A..Z."""
 
-# Takes the letters str and returns a new str with each letter written times the number of it's position
+# Takes the letters str and returns a new str with each letter written times the number of its position
 def accum(letters):
     position, letters_final = 0, ""
     for letter in letters:
