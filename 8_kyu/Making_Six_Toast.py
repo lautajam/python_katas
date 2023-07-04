@@ -20,7 +20,13 @@ And in case of 12 you need 6 toasts less (but not -6):
 
 six_toast(12) == 6"""
 
+# Check if there is space in the toaster or if there is leftover toast.
 def six_toast(num_toast):
-    return 6 - num_toast if (num_toast < 6) else (num_toast - 6)
+    return 6 - num_toast if (num_toast < 6) else num_toast - 6
 
+# MAIN
+
+print(six_toast(0))
+print(six_toast(5))
 print(six_toast(12))
+print(six_toast(23))
