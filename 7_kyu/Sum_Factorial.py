@@ -24,5 +24,5 @@ def factorial(number):
 
 # MAIN
 
-number = 6
+number = 4
 print("The factorial of", number, "is:", factorial(number))
