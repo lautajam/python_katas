@@ -9,7 +9,7 @@ To find out more about Morse Code follow this link: https://en.wikipedia.org/wik
 
 A preloaded object/dictionary/hash called CHAR_TO_MORSE will be provided to help convert characters to Morse Code."""
 
-
+# Takes a word and translate to morse code
 def morse_code_encryption(word):
     CHAR_TO_MORSE = {
         'a': '.-', 'b': '-...', 'c': '-.-.', 'd': '-..', 'e': '.', 'f': '..-.', 'g': '--.', 'h': '....',
