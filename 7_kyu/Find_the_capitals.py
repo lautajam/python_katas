@@ -14,5 +14,4 @@ def SearchCapitals(word):
 
     return capitals_index
 
-
-print(SearchCapitals('CodEWaRs')) # ---> [0, 3, 4, 6]
+print(SearchCapitals('CodEWaRs')) # ---> [0, 3, 4, 6] #
