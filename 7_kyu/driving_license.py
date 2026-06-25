@@ -24,6 +24,8 @@ Rules
 Your task is to code a UK driving license number using an Array of data. The Array will look like
 
 data = ["John","James","Smith","01-Jan-2000","M"]
+Smith01010JJ9AA
+
 Where the elements are as follows
 
 0 = Forename
@@ -34,11 +36,11 @@ Where the elements are as follows
 You will need to output the full 16 digit driving license number, in all UPPERCASE.
 """
 
-EXTRA_APELIDO = "9"
-LIMITE_APELLIDO = 5
-MASCULINO = "M"
-FEMENIMO = "F"
-EXTRA_FEMENINO = 50
+EXTRA_PAD = "9"
+FEMININE = "F"
+FEMALE_MONTH_OFFSET = 50
+ARBITRARY_DIGIT = "9"
+CHECK_DIGITS = "AA"
 
 MONTHS = {
     "Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4,
@@ -48,22 +50,54 @@ MONTHS = {
 
 data = ["John","James","Smith","01-Jan-2000","M"]
 
-def completar_apellido (apellido):
-    if len(apellido) < 5:
-        while len(apellido) < 5:
-            apellido += EXTRA_APELIDO
+# Split date string into [day, month, year]
+def split_date(date):
+    return date.split("-")
+
+
+# Format surname to 5 characters
+def format_surname(apellido):
+    while len(apellido) < 5:
+        apellido += EXTRA_PAD
     return apellido
-#print(completar_apellido("pepe"))
 
-def decada_anio(date):
-    return date.split("-")[2][2]
-#print(decada_anio("3-4-2001"))
 
-def obtain_month(date, gender):
-    month = date.split("-")[1]
-    number = 0
-    for month_list in MONTHS.keys():
-        if month == month_list:
-            number = MONTHS[month_list]
-    return number if gender == MASCULINO else number + EXTRA_FEMENINO
-#print(obtain_month("01-Apr-2000","F"))
+# Get decade and year digit from birth year
+def extract_year_digits(year):
+    return year[2], year[3]
+
+
+# Convert month + apply gender rule
+def format_month(month, gender):
+    value = MONTHS[month]
+    if gender == FEMININE:
+        value += FEMALE_MONTH_OFFSET
+    return str(value).zfill(2)
+
+
+# Get initials (first name + middle name or 9)
+def get_initials(names):
+    return f"{names[0][0]}{names[1][0]}" if names[1] != "" else f"{names[0][0]}{EXTRA_PAD}"
+
+
+# Build full driving licence
+def generate_driving_license(data, year_data, date_array):
+    return (
+        f"{format_surname(data[2])}"
+        f"{year_data[0]}"
+        f"{format_month(date_array[1], data[4])}"
+        f"{date_array[0]}"
+        f"{year_data[1]}"
+        f"{get_initials([data[0], data[1]])}"
+        f"{ARBITRARY_DIGIT}"
+        f"{CHECK_DIGITS}"
+    ).upper()
+
+
+print(
+    generate_driving_license(
+        data,
+        extract_year_digits(split_date(data[3])[2]),
+        split_date(data[3])
+    )
+)
