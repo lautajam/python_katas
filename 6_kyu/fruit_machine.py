@@ -53,29 +53,29 @@ Cherry + Cherry + Cherry == 50
 Return
 result == 50
 """
+from collections import Counter
 
 THREE_SAME = 3
 TWO_SAME = 2
 TWO_SAME_AND_WILD = 1
-WILD = "wild"
+WILD = "Wild"
 
 VALUES = {
-    "wild": [100, 10, 0],
-    "star": [90, 9, 18],
-    "bell": [80, 8, 16],
-    "shell": [70, 7, 14],
-    "seven": [60, 6, 12],
-    "cherry": [50, 5, 10],
-    "bar": [40, 4, 8],
-    "king": [30, 3, 6],
-    "queen": [20, 2, 4],
-    "jack": [10, 1, 2],
+    "Wild": [100, 10, 0],
+    "Star": [90, 9, 18],
+    "Bell": [80, 8, 16],
+    "Shell": [70, 7, 14],
+    "Seven": [60, 6, 12],
+    "Cherry": [50, 5, 10],
+    "Bar": [40, 4, 8],
+    "King": [30, 3, 6],
+    "Queen": [20, 2, 4],
+    "Jack": [10, 1, 2],
 }
 
 
 def fruit(reels, spin):
-    return get_spin_result(reels, spin)
-
+    return get_score_result(get_spin_result(reels, spin))
 
 def get_spin_result(reels, spin):
     spin_result = []
@@ -84,14 +84,23 @@ def get_spin_result(reels, spin):
     return spin_result
 
 def wild_score(spin_result):
-    return VALUES(WILD)[0] if len(spin_result) == 0 else VALUES(WILD)[2]
+    return VALUES[WILD][0] if len(spin_result) == 0 else VALUES[WILD][1]
 
+def get_score(spin_result):
+    if len(spin_result) == 2:
+        return VALUES[spin_result[0]][2] if spin_result[0] == spin_result[1] else 0
+    
+    if spin_result[0] == spin_result[1] and spin_result[1] == spin_result[2] :
+        return VALUES[spin_result[0]][0]
+    
+    if spin_result[0] == spin_result[1] or spin_result[0] == spin_result[2]:
+        return VALUES[spin_result[0]][1]
+    
+    return VALUES[spin_result[1]][1]
+        
 def get_score_result(spin_result):
     spin_result = [x for x in spin_result if x != "Wild"]
-    if len(spin_result) <= 1:
-        return wild_score(spin_result)
-
-
+    return wild_score(spin_result) if len(spin_result) <= 1 else get_score(spin_result)
 
 reel1 = [
     "Wild",
@@ -130,9 +139,8 @@ reel3 = [
     "Jack",
 ]
 
-spin = [5, 5, 5]
+spin = [0, 5, 5]
 
 result = fruit([reel1, reel2, reel3], spin)
 
 print(result)
-# result == 50
