@@ -53,8 +53,6 @@ Cherry + Cherry + Cherry == 50
 Return
 result == 50
 """
-from collections import Counter
-
 THREE_SAME = 3
 TWO_SAME = 2
 TWO_SAME_AND_WILD = 1
