@@ -1,5 +1,5 @@
 """
-   Introduction
+Introduction
 Slot machine (American English), informally fruit machine (British English), puggy (Scottish English slang), the slots
 (Canadian and American English), poker machine (or pokies in slang) (Australian English and New Zealand English) or simply slot
 (American English), is a casino gambling machine with three or more reels which spin when a button is pushed. Slot machines are
@@ -53,9 +53,7 @@ Cherry + Cherry + Cherry == 50
 Return
 result == 50
 """
-THREE_SAME = 3
-TWO_SAME = 2
-TWO_SAME_AND_WILD = 1
+
 WILD = "Wild"
 
 VALUES = {
@@ -70,7 +68,6 @@ VALUES = {
     "Queen": [20, 2, 4],
     "Jack": [10, 1, 2],
 }
-
 
 def fruit(reels, spin):
     return get_score_result(get_spin_result(reels, spin))
@@ -88,7 +85,7 @@ def get_score(spin_result):
     if len(spin_result) == 2:
         return VALUES[spin_result[0]][2] if spin_result[0] == spin_result[1] else 0
     
-    if spin_result[0] == spin_result[1] and spin_result[1] == spin_result[2] :
+    if spin_result[0] == spin_result[1] and spin_result[1] == spin_result[2]:
         return VALUES[spin_result[0]][0]
     
     if spin_result[0] == spin_result[1] or spin_result[0] == spin_result[2]:
@@ -99,6 +96,7 @@ def get_score(spin_result):
 def get_score_result(spin_result):
     spin_result = [x for x in spin_result if x != "Wild"]
     return wild_score(spin_result) if len(spin_result) <= 1 else get_score(spin_result)
+
 
 reel1 = [
     "Wild",
